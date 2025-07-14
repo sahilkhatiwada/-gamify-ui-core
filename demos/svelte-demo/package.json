@@ -1,0 +1,20 @@
+{
+  "name": "gamify-svelte-demo",
+  "version": "1.0.0",
+  "description": "Svelte demo for @gamify-ui/core",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@gamify-ui/core": "file:../../"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^2.5.2",
+    "svelte": "^4.2.7",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  }
+} 

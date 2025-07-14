@@ -1,0 +1,48 @@
+# Source files
+src/
+tests/
+demo/
+
+# Development files
+.vscode/
+.idea/
+*.log
+*.tsbuildinfo
+
+# Build tools
+rollup.config.js
+jest.config.js
+tsconfig.json
+.eslintrc.js
+.prettierrc
+
+# Documentation
+docs/
+*.md
+!README.md
+!LICENSE
+!CONTRIBUTING.md
+!ARCHITECTURE.md
+
+# Git
+.git/
+.gitignore
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+
+# Coverage reports
+coverage/
+
+# Temporary files
+*.tmp
+*.temp 

@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@gamify-ui/core - Basic Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .user-panel {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+        }
+
+        .user-panel h2 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .user-info {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .user-info h3 {
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .leaderboard-panel {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #e9ecef;
+        }
+
+        .leaderboard-panel h2 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .leaderboard {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .leaderboard-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e9ecef;
+            transition: background 0.3s ease;
+        }
+
+        .leaderboard-item:hover {
+            background: #f8f9fa;
+        }
+
+        .leaderboard-item:last-child {
+            border-bottom: none;
+        }
+
+        .rank {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .rank-1 { background: #ffd700; color: #333; }
+        .rank-2 { background: #c0c0c0; color: #333; }
+        .rank-3 { background: #cd7f32; color: white; }
+        .rank-other { background: #e9ecef; color: #6c757d; }
+
+        .user-details {
+            flex: 1;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        .user-stats {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .notifications {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .notification {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            border-left: 4px solid #28a745;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.success {
+            border-left-color: #28a745;
+        }
+
+        .notification.warning {
+            border-left-color: #ffc107;
+        }
+
+        .notification.info {
+            border-left-color: #17a2b8;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 @gamify-ui/core</h1>
+            <p>Interactive Gamification Demo</p>
+        </div>
+
+        <div class="content">
+            <div class="user-panel">
+                <h2>👤 User Profile</h2>
+                <div class="user-info">
+                    <h3>Player Stats</h3>
+                    <div class="stat-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="user-level">1</div>
+                            <div class="stat-label">Level</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="user-xp">0</div>
+                            <div class="stat-label">XP</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="user-badges">0</div>
+                            <div class="stat-label">Badges</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="user-streaks">0</div>
+                            <div class="stat-label">Streaks</div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="level-progress" style="width: 0%"></div>
+                    </div>
+                    <div style="text-align: center; color: #6c757d; font-size: 0.9rem;">
+                        <span id="progress-text">0 / 100 XP to next level</span>
+                    </div>
+                </div>
+
+                <div class="user-info">
+                    <h3>🎯 Actions</h3>
+                    <div class="actions">
+                        <button class="btn btn-primary" onclick="triggerAction('click')">
+                            🖱️ Click
+                        </button>
+                        <button class="btn btn-primary" onclick="triggerAction('scroll')">
+                            📜 Scroll
+                        </button>
+                        <button class="btn btn-primary" onclick="triggerAction('share')">
+                            📤 Share
+                        </button>
+                        <button class="btn btn-primary" onclick="triggerAction('comment')">
+                            💬 Comment
+                        </button>
+                        <button class="btn btn-secondary" onclick="triggerAction('daily')">
+                            📅 Daily Check-in
+                        </button>
+                        <button class="btn btn-secondary" onclick="triggerAction('weekly')">
+                            📊 Weekly Goal
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="leaderboard-panel">
+                <h2>🏆 Leaderboard</h2>
+                <div class="leaderboard" id="leaderboard">
+                    <!-- Leaderboard items will be populated here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notifications" id="notifications"></div>
+
+    <script type="module">
+        // Import the gamification engine
+        import { GamifyEngine } from '../../dist/index.js';
+
+        // Initialize the engine
+        const engine = new GamifyEngine({
+            debug: true,
+            theme: {
+                colors: {
+                    primary: '#667eea',
+                    secondary: '#764ba2',
+                    success: '#28a745',
+                    warning: '#ffc107',
+                    error: '#dc3545',
+                    background: '#ffffff',
+                    surface: '#f8f9fa',
+                    text: '#495057'
+                }
+            }
+        });
+
+        // Create demo users
+        const users = [
+            { id: 'user-1', name: 'John Doe', xp: 0 },
+            { id: 'user-2', name: 'Jane Smith', xp: 150 },
+            { id: 'user-3', name: 'Bob Johnson', xp: 300 },
+            { id: 'user-4', name: 'Alice Brown', xp: 500 },
+            { id: 'user-5', name: 'Charlie Wilson', xp: 750 }
+        ];
+
+        users.forEach(user => {
+            engine.createUser(user.id, user.name);
+            if (user.xp > 0) {
+                engine.updateUser(user.id, { xp: user.xp });
+            }
+        });
+
+        // Set current user
+        let currentUserId = 'user-1';
+
+        // Add some game rules
+        engine.addRule({
+            id: 'click-rule',
+            trigger: {
+                type: 'click',
+                reward: { xp: 10 }
+            },
+            enabled: true,
+            priority: 1
+        });
+
+        engine.addRule({
+            id: 'scroll-rule',
+            trigger: {
+                type: 'scroll',
+                reward: { xp: 5 }
+            },
+            enabled: true,
+            priority: 1
+        });
+
+        engine.addRule({
+            id: 'share-rule',
+            trigger: {
+                type: 'share',
+                reward: { xp: 25 }
+            },
+            enabled: true,
+            priority: 1
+        });
+
+        engine.addRule({
+            id: 'comment-rule',
+            trigger: {
+                type: 'comment',
+                reward: { xp: 15 }
+            },
+            enabled: true,
+            priority: 1
+        });
+
+        engine.addRule({
+            id: 'daily-rule',
+            trigger: {
+                type: 'daily',
+                reward: { xp: 50 }
+            },
+            enabled: true,
+            priority: 1
+        });
+
+        engine.addRule({
+            id: 'weekly-rule',
+            trigger: {
+                type: 'weekly',
+                reward: { xp: 100 }
+            },
+            enabled: true,
+            priority: 1
+        });
+
+        // Add missions
+        engine.addMission({
+            id: 'first-click',
+            title: 'First Click',
+            description: 'Click for the first time',
+            goal: { type: 'event', value: 1 },
+            reward: { xp: 50 },
+            repeatable: false,
+            difficulty: 'easy'
+        });
+
+        engine.addMission({
+            id: 'click-master',
+            title: 'Click Master',
+            description: 'Click 10 times',
+            goal: { type: 'event', value: 10 },
+            reward: { xp: 100 },
+            repeatable: false,
+            difficulty: 'medium'
+        });
+
+        // Update UI functions
+        function updateUserUI() {
+            const user = engine.getUser(currentUserId);
+            if (!user) return;
+
+            const level = user.level;
+            const xp = user.xp;
+            const badges = user.badges.length;
+            const streaks = user.streaks.length;
+            const progress = engine.getLevelProgress(user);
+
+            document.getElementById('user-level').textContent = level;
+            document.getElementById('user-xp').textContent = xp;
+            document.getElementById('user-badges').textContent = badges;
+            document.getElementById('user-streaks').textContent = streaks;
+            document.getElementById('level-progress').style.width = `${progress.progress * 100}%`;
+            document.getElementById('progress-text').textContent = 
+                `${xp - progress.current} / ${progress.next - progress.current} XP to next level`;
+        }
+
+        function updateLeaderboard() {
+            const leaderboard = engine.getLeaderboard(10);
+            const container = document.getElementById('leaderboard');
+            
+            container.innerHTML = leaderboard.map((entry, index) => `
+                <div class="leaderboard-item">
+                    <div class="rank ${index < 3 ? `rank-${index + 1}` : 'rank-other'}">
+                        ${entry.rank}
+                    </div>
+                    <div class="user-details">
+                        <div class="user-name">${entry.userName}</div>
+                        <div class="user-stats">Level ${entry.level} • ${entry.score} XP</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function showNotification(message, type = 'success') {
+            const notifications = document.getElementById('notifications');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            
+            notifications.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => notification.classList.add('show'), 100);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Global function for triggering actions
+        window.triggerAction = function(actionType) {
+            try {
+                engine.triggerEvent(currentUserId, actionType);
+                
+                const user = engine.getUser(currentUserId);
+                const xpGained = actionType === 'click' ? 10 : 
+                               actionType === 'scroll' ? 5 :
+                               actionType === 'share' ? 25 :
+                               actionType === 'comment' ? 15 :
+                               actionType === 'daily' ? 50 : 100;
+
+                showNotification(`+${xpGained} XP for ${actionType}!`, 'success');
+                updateUserUI();
+                updateLeaderboard();
+            } catch (error) {
+                showNotification(`Error: ${error.message}`, 'error');
+            }
+        };
+
+        // Subscribe to events
+        engine.onLevelUp().subscribe(user => {
+            showNotification(`🎉 Level Up! You're now level ${user.level}!`, 'success');
+        });
+
+        engine.onAchievement().subscribe(data => {
+            showNotification(`🏆 Achievement Unlocked: ${data.achievement.title}!`, 'warning');
+        });
+
+        // Initialize UI
+        updateUserUI();
+        updateLeaderboard();
+
+        // Add scroll event listener
+        let scrollCount = 0;
+        window.addEventListener('scroll', () => {
+            scrollCount++;
+            if (scrollCount % 10 === 0) { // Every 10 scrolls
+                triggerAction('scroll');
+            }
+        });
+
+        console.log('🎮 Gamification Demo Loaded!');
+        console.log('Try clicking the buttons or scrolling to see the gamification in action!');
+    </script>
+</body>
+</html> 

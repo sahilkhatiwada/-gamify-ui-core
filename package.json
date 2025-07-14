@@ -1,0 +1,119 @@
+{
+  "name": "@gamify-ui/core",
+  "version": "1.0.0",
+  "description": "🚀 The ultimate gamification engine for modern web applications. Framework-agnostic, real-time leaderboards, custom rule engine, streaks, missions, and AI-powered features.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "ARCHITECTURE.md"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci --coverage --watchAll=false",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "prebuild": "npm run clean",
+    "prepublishOnly": "npm run build && npm run test:ci",
+    "demo:basic": "cd demos/basic-demo && python -m http.server 8000",
+    "demo:react": "cd demos/react-demo && npm run dev",
+    "demo:vue": "cd demos/vue-demo && npm run dev",
+    "demo:svelte": "cd demos/svelte-demo && npm run dev",
+    "demo:all": "concurrently \"npm run demo:basic\" \"npm run demo:react\" \"npm run demo:vue\" \"npm run demo:svelte\"",
+    "example:advanced": "ts-node examples/advanced-gamification.ts"
+  },
+  "keywords": [
+    "gamification",
+    "game-engine",
+    "leaderboard",
+    "achievements",
+    "badges",
+    "streaks",
+    "missions",
+    "xp-system",
+    "leveling",
+    "react",
+    "vue",
+    "angular",
+    "typescript",
+    "javascript",
+    "web",
+    "ui",
+    "ux",
+    "engagement",
+    "motivation",
+    "rewards",
+    "real-time",
+    "framework-agnostic",
+    "plugin-system",
+    "ai-powered",
+    "customizable",
+    "scalable"
+  ],
+  "author": {
+    "name": "Gamify UI Team",
+    "email": "team@gamify-ui.com",
+    "url": "https://github.com/gamify-ui"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gamify-ui/core.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gamify-ui/core/issues"
+  },
+  "homepage": "https://github.com/gamify-ui/core#readme",
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.0",
+    "@rollup/plugin-node-resolve": "^13.3.0",
+    "@rollup/plugin-typescript": "^8.3.3",
+    "@testing-library/jest-dom": "^5.16.0",
+    "@testing-library/react": "^13.0.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/jest": "^29.5.0",
+    "@types/node": "^20.0.0",
+    "@types/uuid": "^10.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "concurrently": "^8.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.5.0",
+    "jest-environment-jsdom": "^29.5.0",
+    "rimraf": "^5.0.0",
+    "rollup": "^2.79.1",
+    "rollup-plugin-dts": "^4.2.3",
+    "rollup-plugin-terser": "^7.0.2",
+    "ts-jest": "^29.1.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
