@@ -1,15 +1,43 @@
-# 🚀 @gamify-ui/core
-
-> **The Complete Gamification Engine for Modern Frontend Apps**
-
-Transform users into players. Turn sessions into streaks. Make your UI unforgettable.
-
-Whether you're building dashboards, learning platforms, productivity tools, or e-commerce flows — @gamify-ui/core is your plug-and-play gamification engine designed to supercharge engagement, retention, and growth.
+The Complete Gamification Engine for Modern Frontend Apps
 
 [![npm version](https://badge.fury.io/js/%40gamify-ui%2Fcore.svg)](https://badge.fury.io/js/%40gamify-ui%2Fcore)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Framework Agnostic](https://img.shields.io/badge/Framework-Agnostic-blue)](https://github.com/gamify-ui/core)
+
+Transform users into players. Turn sessions into streaks. Make your UI unforgettable.
+
+## 📦 Installation
+
+```bash
+npm install @gamify-ui/core
+# or
+yarn add @gamify-ui/core
+# or
+pnpm add @gamify-ui/core
+```
+
+## 🚀 Minimal Usage
+
+```typescript
+import { GamifyEngine, createUser, triggerEvent } from '@gamify-ui/core';
+
+// Initialize the gamification engine
+const gamify = new GamifyEngine({
+  rules: {
+    'first-click': {
+      trigger: 'click',
+      reward: { xp: 10, badge: 'First Steps' }
+    }
+  }
+});
+
+// Create a user
+const user = createUser('user-123');
+
+// Trigger an event
+triggerEvent(user, 'click', { element: 'button' });
+```
 
 ## 🎮 Why @gamify-ui/core Will Change the Way You Build Frontend Apps
 
@@ -33,71 +61,6 @@ Gamification isn't a gimmick — it's a proven strategy to boost motivation and 
 - **✅ Universally needed** - Gamification for LMS, SaaS, fitness, e-commerce, finance, education, productivity
 - **✅ Share-worthy UX** - Reward animations and badge popups people want to post on LinkedIn, Twitter, Instagram
 - **✅ Growth Loop Ready** - Drives return visits, higher retention, and social bragging rights
-
-## 🚀 Quick Start
-
-```bash
-npm install @gamify-ui/core
-# or
-yarn add @gamify-ui/core
-# or
-pnpm add @gamify-ui/core
-```
-
-### Basic Usage
-
-```typescript
-import { GamifyEngine, createUser, triggerEvent } from '@gamify-ui/core';
-
-// Initialize the gamification engine
-const gamify = new GamifyEngine({
-  rules: {
-    'first-click': {
-      trigger: 'click',
-      reward: { xp: 10, badge: 'First Steps' }
-    },
-    'scroll-master': {
-      trigger: 'scroll',
-      condition: { threshold: 1000 },
-      reward: { xp: 50, badge: 'Scroll Master' }
-    }
-  }
-});
-
-// Create a user
-const user = createUser('user-123');
-
-// Trigger events
-triggerEvent(user, 'click', { element: 'button' });
-triggerEvent(user, 'scroll', { distance: 1200 });
-```
-
-### React Integration
-
-```tsx
-import { useGamify } from '@gamify-ui/react';
-
-function MyComponent() {
-  const { user, triggerEvent, achievements } = useGamify();
-  
-  return (
-    <div>
-      <h2>Welcome, {user.name}!</h2>
-      <p>Level: {user.level} | XP: {user.xp}</p>
-      
-      <button onClick={() => triggerEvent('click', { element: 'cta-button' })}>
-        Click me for XP!
-      </button>
-      
-      {achievements.map(achievement => (
-        <div key={achievement.id} className="achievement">
-          🏆 {achievement.name}
-        </div>
-      ))}
-    </div>
-  );
-}
-```
 
 ## 🎯 Advanced Features
 
@@ -269,45 +232,13 @@ const insights = await analytics.getInsights({
 - **SaaS Onboarding Journeys** - Guide users through feature discovery
 - **Developer Communities** - Gamify contributions and knowledge sharing
 
-## 📦 Installation
+## 📚 Documentation
 
-### Core Package
-
-```bash
-npm install @gamify-ui/core
-```
-
-### Framework-Specific Plugins
-
-```bash
-# React
-npm install @gamify-ui/react
-
-# Vue
-npm install @gamify-ui/vue
-
-# Angular
-npm install @gamify-ui/angular
-
-# Svelte
-npm install @gamify-ui/svelte
-```
-
-### Additional Features
-
-```bash
-# AI-powered suggestions
-npm install @gamify-ui/ai
-
-# Advanced analytics
-npm install @gamify-ui/analytics
-
-# Sound packs
-npm install @gamify-ui/sounds
-
-# Animation packs
-npm install @gamify-ui/animations
-```
+- [Getting Started](https://docs.gamify-ui.com/getting-started)
+- [API Reference](https://docs.gamify-ui.com/api)
+- [Examples](https://docs.gamify-ui.com/examples)
+- [Tutorials](https://docs.gamify-ui.com/tutorials)
+- [Migration Guide](https://docs.gamify-ui.com/migration)
 
 ## 🧪 Testing
 
@@ -320,27 +251,6 @@ npm run test:coverage
 
 # Run e2e tests
 npm run test:e2e
-```
-
-## 📚 Documentation
-
-- [Getting Started](https://docs.gamify-ui.com/getting-started)
-- [API Reference](https://docs.gamify-ui.com/api)
-- [Examples](https://docs.gamify-ui.com/examples)
-- [Tutorials](https://docs.gamify-ui.com/tutorials)
-- [Migration Guide](https://docs.gamify-ui.com/migration)
-
-## 🤝 Contributing
-
-We love contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-### Development Setup
-
-```bash
-git clone https://github.com/gamify-ui/core.git
-cd core
-npm install
-npm run dev
 ```
 
 ## 📄 License
@@ -360,5 +270,4 @@ Get started with @gamify-ui/core today and join the global gamification movement
 
 [![Star on GitHub](https://img.shields.io/github/stars/gamify-ui/core?style=social)](https://github.com/gamify-ui/core)
 [![Follow on Twitter](https://img.shields.io/twitter/follow/gamify_ui?style=social)](https://twitter.com/gamify_ui)
-[![Join Discord](https://img.shields.io/discord/1234567890?style=flat&logo=discord)](https://discord.gg/gamify-ui) #   - g a m i f y - u i - c o r e  
- 
+[![Join Discord](https://img.shields.io/discord/1234567890?style=flat&logo=discord)](https://discord.gg/gamify-ui)

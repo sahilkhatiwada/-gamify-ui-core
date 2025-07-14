@@ -1,6 +1,6 @@
 {
   "name": "gamify-ui-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "🚀 The ultimate gamification engine for modern web applications. Framework-agnostic, real-time leaderboards, custom rule engine, streaks, missions, and AI-powered features.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
